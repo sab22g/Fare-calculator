@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fare Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .container h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        .button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Fare Calculator</h2>
+        <div class="input-group">
+            <label for="baseFare">Base Fare:</label>
+            <input type="number" id="baseFare" placeholder="Enter base fare">
+        </div>
+        <div class="input-group">
+            <label for="kms">Distance (kms):</label>
+            <input type="number" id="kms" placeholder="Enter distance in kilometers">
+        </div>
+        <div class="input-group">
+            <label for="kmMultiplier">Distance Multiplier:</label>
+            <input type="number" id="kmMultiplier" placeholder="Enter distance multiplier">
+        </div>
+        <div class="input-group">
+            <label for="time">Time:</label>
+            <input type="number" id="time" placeholder="Enter time">
+        </div>
+        <div class="input-group">
+            <label for="timeMultiplier">Time Multiplier:</label>
+            <input type="number" id="timeMultiplier" placeholder="Enter time multiplier">
+        </div>
+        <button class="button" onclick="calculateFare()">Calculate Fare</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateFare() {
+            // Get the input values
+            var baseFare = parseFloat(document.getElementById('baseFare').value);
+            var kms = parseFloat(document.getElementById('kms').value);
+            var kmMultiplier = parseFloat(document.getElementById('kmMultiplier').value);
+            var time = parseFloat(document.getElementById('time').value);
+            var timeMultiplier = parseFloat(document.getElementById('timeMultiplier').value);
+
+            // Calculate total fare
+            var totalFare = baseFare + (kms * kmMultiplier) + (time * timeMultiplier);
+
+            // Subtract commission
+            var finalFare = totalFare * (1 - 0.275);
+
+            // Display the result
+            document.getElementById('result').innerText = "Final fare after commission: $" + finalFare.toFixed(2);
+        }
+    </script>
+</body>
+</html>
